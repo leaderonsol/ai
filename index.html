@@ -24,7 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
     <style>
-        /* Critical Reset and Mobile Fixes */
+        /* Critical Reset */
         html, body {
             margin: 0 !important;
             padding: 0 !important;
@@ -32,11 +32,52 @@
             width: 100%;
             overflow-x: hidden;
             background: #0a0014;
+            position: relative;
+        }
+
+        #content-wrapper {
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Mobile Contract Address Fix */
+        @media (max-width: 768px) {
+            .contract-address span {
+                font-size: 11px !important;
+                word-break: break-word !important;
+                display: inline-block;
+                max-width: 100%;
+                overflow-wrap: break-word;
+            }
+            
+            .contract-address .glass-effect {
+                padding: 6px !important;
+                margin: 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .contract-address .glass-effect > div {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .copy-icon {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Background Fix */
+        .background-effects {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Mobile-specific fixes */
@@ -914,6 +955,80 @@
             to {
                 opacity: 1;
             }
+        }
+
+        /* Enhanced Mobile Chat Interface */
+        @media (max-width: 768px) {
+            #chat-interface {
+                position: fixed;
+                bottom: 80px !important;
+                right: 10px !important;
+                left: 10px !important;
+                width: auto !important;
+                max-width: calc(100% - 20px) !important;
+                max-height: 70vh !important;
+                margin: 0 !important;
+                border-radius: 16px !important;
+            }
+
+            #chat-messages {
+                height: 50vh !important;
+                max-height: 50vh !important;
+            }
+
+            .message-bubble {
+                max-width: 85% !important;
+                word-break: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+
+            .message-bubble p {
+                font-size: 14px !important;
+                line-height: 1.4 !important;
+            }
+
+            #chat-input {
+                font-size: 14px !important;
+                padding: 8px 12px !important;
+            }
+
+            .quick-action-btn {
+                font-size: 12px !important;
+                padding: 4px 8px !important;
+                white-space: nowrap !important;
+            }
+
+            #ai-chat-button {
+                bottom: 16px !important;
+                right: 16px !important;
+                transform: scale(0.9) !important;
+            }
+
+            .contract-text {
+                font-size: 12px !important;
+                word-break: break-all !important;
+                display: inline-block !important;
+                max-width: 100% !important;
+            }
+        }
+
+        /* Ensure chat interface stays within viewport */
+        #chat-interface {
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .message-bubble {
+            max-width: 85%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
     </style>
 </head>
