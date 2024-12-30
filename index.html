@@ -1372,6 +1372,145 @@
                 touch-action: manipulation !important;
             }
         }
+
+        /* Enhanced Mobile Chat Interface */
+        @media (max-width: 768px) {
+            #chat-interface {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                z-index: 9999 !important;
+                background: rgba(10, 0, 20, 0.98) !important;
+            }
+
+            #chat-messages {
+                height: calc(100vh - 140px) !important;
+                max-height: none !important;
+                padding: 16px !important;
+            }
+
+            #chat-interface .p-4 {
+                padding: 12px !important;
+            }
+
+            /* Chat header */
+            #chat-interface > div:first-child {
+                padding: 12px !important;
+                background: rgba(0, 0, 0, 0.3) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+            }
+
+            /* Close button */
+            #close-chat {
+                padding: 8px !important;
+            }
+
+            /* Input area */
+            #chat-interface > div:last-child {
+                padding: 12px !important;
+                background: rgba(0, 0, 0, 0.3) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+            }
+
+            #chat-input {
+                padding: 12px !important;
+                font-size: 16px !important; /* Prevent zoom on iOS */
+            }
+
+            /* Hide AI chat button when chat is open */
+            #chat-interface:not(.hidden) ~ #ai-chat-button {
+                display: none !important;
+            }
+        }
+
+        /* Improved Scrolling Performance */
+        * {
+            -webkit-overflow-scrolling: touch !important;
+            overscroll-behavior: none !important;
+            scroll-behavior: smooth !important;
+        }
+
+        body {
+            touch-action: manipulation !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        #content-wrapper {
+            position: relative !important;
+            z-index: 1 !important;
+            background: #0a0014 !important;
+            min-height: 100vh !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            -webkit-overflow-scrolling: touch !important;
+            overscroll-behavior-y: none !important;
+            will-change: transform !important;
+        }
+
+        /* Optimize scrolling containers */
+        .custom-scrollbar {
+            scrollbar-width: thin !important;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px !important;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent !important;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            border-radius: 4px !important;
+        }
+
+        /* Reduce motion on mobile */
+        @media (max-width: 768px) {
+            * {
+                animation-duration: 0s !important;
+                transition-duration: 0s !important;
+            }
+
+            .transform, .transition-all {
+                transform: none !important;
+                transition: none !important;
+            }
+
+            .hover\:scale-105:hover {
+                transform: none !important;
+            }
+
+            /* Optimize touch interactions */
+            .glass-effect, button, a {
+                touch-action: manipulation !important;
+                -webkit-tap-highlight-color: transparent !important;
+                user-select: none !important;
+                -webkit-user-select: none !important;
+            }
+
+            /* Improve scroll performance */
+            .container {
+                transform: translateZ(0) !important;
+                -webkit-transform: translateZ(0) !important;
+                backface-visibility: hidden !important;
+                -webkit-backface-visibility: hidden !important;
+                perspective: 1000px !important;
+                -webkit-perspective: 1000px !important;
+            }
+        }
     </style>
 </head>
 <body style="margin: 0; padding: 0;">
