@@ -1090,6 +1090,8 @@
                 position: relative !important;
                 background-attachment: fixed !important;
                 -webkit-overflow-scrolling: touch !important;
+                overscroll-behavior: none !important;
+                -webkit-tap-highlight-color: transparent !important;
             }
 
             /* Fix content overflow */
@@ -1098,15 +1100,17 @@
                 width: 100% !important;
                 position: relative !important;
                 max-width: 100vw !important;
+                overscroll-behavior: none !important;
             }
 
             /* Fix container width */
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding-left: 15px !important;
-                padding-right: 15px !important;
+                padding-left: 12px !important;
+                padding-right: 12px !important;
                 overflow-x: hidden !important;
+                margin: 0 auto !important;
             }
 
             /* Fix text overflow */
@@ -1118,16 +1122,40 @@
                 hyphens: auto !important;
             }
 
-            /* Fix contract address display */
+            /* Enhanced contract address display */
             .contract-address {
                 max-width: 100% !important;
-                padding: 0 10px !important;
+                padding: 0 !important;
+                margin: 0 auto !important;
             }
 
             .contract-address span {
-                font-size: 12px !important;
+                font-size: 11px !important;
                 line-height: 1.4 !important;
                 word-break: break-all !important;
+                display: block !important;
+                padding: 4px 0 !important;
+            }
+
+            .contract-address .glass-effect {
+                padding: 8px !important;
+                margin: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+
+            .contract-address .glass-effect > div {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 8px !important;
+            }
+
+            .copy-icon {
+                margin: 4px auto !important;
+                padding: 8px !important;
             }
 
             /* Fix background effects */
@@ -1142,6 +1170,7 @@
                 -webkit-transform: translateZ(0) !important;
                 backface-visibility: hidden !important;
                 -webkit-backface-visibility: hidden !important;
+                will-change: transform !important;
             }
 
             /* Fix navigation */
@@ -1151,12 +1180,16 @@
                 right: 0 !important;
                 position: fixed !important;
                 z-index: 1000 !important;
+                backdrop-filter: blur(20px) !important;
+                -webkit-backdrop-filter: blur(20px) !important;
+                background: rgba(15, 23, 42, 0.95) !important;
             }
 
             /* Fix hero section */
             .hero-gradient {
-                padding-left: 10px !important;
-                padding-right: 10px !important;
+                padding-top: 100px !important;
+                padding-left: 12px !important;
+                padding-right: 12px !important;
                 overflow: hidden !important;
             }
 
@@ -1164,40 +1197,17 @@
             img {
                 max-width: 100% !important;
                 height: auto !important;
-            }
-
-            /* Fix chat interface */
-            #chat-interface {
-                width: 90% !important;
-                left: 5% !important;
-                right: 5% !important;
-                max-height: 80vh !important;
-            }
-
-            .message-bubble {
-                max-width: 85% !important;
-                word-break: break-word !important;
+                -webkit-user-drag: none !important;
             }
 
             /* Fix glass effect cards */
             .glass-effect {
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                background: rgba(26, 0, 51, 0.6) !important;
+                background: rgba(26, 0, 51, 0.8) !important;
             }
-        }
 
-        /* Fix background flickering globally */
-            .background-effects {
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            will-change: transform;
-        }
-
-        /* Optimize animations for mobile */
-        @media (max-width: 768px) {
+            /* Disable animations for better performance */
             .particle, .spark, .orb {
                 display: none !important;
             }
@@ -1205,6 +1215,8 @@
             .hero-image {
                 animation: none !important;
                 transform: none !important;
+                max-width: 280px !important;
+                margin: 0 auto !important;
             }
             
             .gradient-text {
@@ -1214,229 +1226,94 @@
                 background-clip: text !important;
                 color: transparent !important;
             }
-        }
 
-        /* Enhanced Mobile Contract Address Fix */
-        @media (max-width: 768px) {
-            .contract-address {
+            /* Fix button layout */
+            .btn-hover {
                 width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                box-sizing: border-box !important;
-            }
-
-            .contract-address .glass-effect {
-                width: 100% !important;
-                padding: 12px !important;
-                margin: 0 !important;
-                box-sizing: border-box !important;
-            }
-
-            .contract-address span {
-                font-size: 10px !important;
-                line-height: 1.4 !important;
-                word-break: break-all !important;
-                width: 100% !important;
+                max-width: 300px !important;
+                margin: 0 auto !important;
                 text-align: center !important;
-                padding: 0 4px !important;
             }
 
-            .contract-address .glass-effect > div {
-                flex-direction: column !important;
-                align-items: center !important;
-                gap: 8px !important;
-                width: 100% !important;
+            /* Fix grid layouts */
+            .grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
             }
 
-            /* Fix navigation z-index */
-            nav.main-nav {
-                z-index: 9999 !important;
+            /* Fix spacing */
+            .py-20 {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
             }
 
-            /* Ensure content is below nav */
-            .hero-gradient {
-                padding-top: 100px !important;
-                position: relative !important;
-                z-index: 1 !important;
+            .py-32 {
+                padding-top: 60px !important;
+                padding-bottom: 60px !important;
             }
 
-            /* Fix glass effect cards */
-            .glass-effect {
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-                background: rgba(26, 0, 51, 0.6) !important;
-                max-width: 100% !important;
-                overflow: hidden !important;
-            }
-        }
-
-        /* Global contract address styles */
-        .contract-address {
-            width: 100%;
-            max-width: 100%;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        .contract-address .glass-effect {
-            width: 100%;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        .contract-address span {
-            max-width: 100%;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            word-break: break-all;
-            display: inline-block;
-            box-sizing: border-box;
-        }
-
-        /* Fix z-index hierarchy */
-        nav.main-nav {
-            z-index: 9999;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-        }
-
-        .hero-gradient {
-            position: relative;
-            z-index: 1;
-        }
-
-        .glass-effect {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Mobile Contract Address Ultimate Fix */
-        .contract-address {
-            width: 100%;
-            max-width: 100%;
-            padding: 0 !important;
-            margin: 0 !important;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        .contract-address .glass-effect {
-            width: 100%;
-            max-width: 100%;
-            padding: 8px !important;
-            margin: 0 !important;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        .contract-address span {
-            font-family: monospace;
-            font-size: clamp(8px, 3vw, 14px) !important;
-            line-height: 1.4;
-            letter-spacing: -0.2px;
-            word-break: break-all;
-            overflow-wrap: break-word;
-            display: inline-block;
-            width: 100%;
-            text-align: center;
-            padding: 0;
-        }
-
-        @media (max-width: 768px) {
-            .contract-address {
-                padding: 0 5px !important;
+            /* Fix font sizes */
+            .text-3xl {
+                font-size: 1.5rem !important;
             }
 
-            .contract-address .glass-effect {
-                padding: 8px 4px !important;
+            .text-4xl {
+                font-size: 1.875rem !important;
             }
 
-            .contract-address .glass-effect > div {
-                flex-direction: column !important;
-                gap: 8px !important;
+            .text-5xl {
+                font-size: 2.25rem !important;
             }
 
-            .contract-address span {
-                font-size: 2.8vw !important;
-                letter-spacing: -0.3px;
-                padding: 0 2px;
-            }
-
-            .copy-icon {
-                transform: scale(0.9);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .contract-address span {
-                font-size: 2.5vw !important;
-            }
-        }
-
-        /* Fix container padding */
-        .container {
-            padding-left: max(15px, 4vw) !important;
-            padding-right: max(15px, 4vw) !important;
-        }
-
-        /* Mobile Buy Button Fix */
-        @media (max-width: 768px) {
-            .contract-address.mb-8 {
-                margin-bottom: 2rem !important;
-            }
-
-            .hero-buy-button {
-                margin-top: 1.5rem !important;
-                width: 100% !important;
-            }
-
-            .hero-buy-button a {
-                width: 100% !important;
-                justify-content: center !important;
-                padding: 1rem !important;
-                font-size: 1.1rem !important;
-            }
-
-            /* Mobile AI Chat Fixes */
+            /* Fix chat interface */
             #chat-interface {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                bottom: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                max-height: 100% !important;
-                margin: 0 !important;
-                border-radius: 0 !important;
-                z-index: 10000 !important;
+                width: 90% !important;
+                left: 5% !important;
+                right: 5% !important;
+                bottom: 80px !important;
+                max-height: 80vh !important;
             }
 
             #chat-messages {
-                height: calc(100vh - 140px) !important;
-                max-height: none !important;
-            }
-
-            #chat-interface .p-4.border-b {
-                padding: 1rem !important;
-                background: rgba(0, 0, 0, 0.2) !important;
-            }
-
-            #close-chat {
-                padding: 0.5rem !important;
-                background: rgba(255, 255, 255, 0.1) !important;
-                border-radius: 0.5rem !important;
+                height: 60vh !important;
+                max-height: 400px !important;
             }
 
             .message-bubble {
                 max-width: 85% !important;
+                word-break: break-word !important;
             }
+        }
 
-            #chat-input {
-                font-size: 16px !important; /* Prevents zoom on iOS */
-            }
+        /* Fix background flickering globally */
+        .background-effects {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            will-change: transform;
+            position: fixed !important;
+            pointer-events: none !important;
+            z-index: -1 !important;
+        }
+
+        /* Add these base styles */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        input, textarea {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        /* Prevent pull-to-refresh */
+        body {
+            overscroll-behavior-y: none;
+            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
@@ -1448,25 +1325,55 @@
                 <div class="text-2xl md:text-3xl font-bold tracking-wider">
                     <span class="gradient-text">$LEADER</span>
                 </div>
-                <div class="flex items-center space-x-2 md:space-x-8">
-                    <!-- Social links -->
-                    <a href="https://x.com/LeaderONSolana" target="_blank" class="hidden md:block text-white hover:text-pink-400 transition-all">
+                <!-- Mobile Menu -->
+                <div class="flex md:hidden items-center space-x-3">
+                    <a href="https://jup.ag/swap/SOL-FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon" target="_blank" class="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 px-4 py-1.5 rounded-full font-bold text-sm text-white whitespace-nowrap">
+                        Buy Now
+                    </a>
+                    <button class="text-white p-2 focus:outline-none" id="mobile-menu-button">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-2 md:space-x-8">
+                    <a href="https://x.com/LeaderONSolana" target="_blank" class="text-white hover:text-pink-400 transition-all">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
                         </svg>
                     </a>
-                    <a href="https://t.me/squidgamesportal" target="_blank" class="hidden md:block text-white hover:text-pink-400 transition-all">
+                    <a href="https://t.me/squidgamesportal" target="_blank" class="text-white hover:text-pink-400 transition-all">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.623 4.823-4.35c.212-.19-.043-.295-.325-.105l-5.965 3.75-2.525-.785c-.55-.176-.564-.576.12-.852l9.873-3.8c.456-.204.856.11.86.57z"/>
                         </svg>
                     </a>
-                    <a href="https://dexscreener.com/solana/FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon" target="_blank" class="hidden md:block text-white hover:text-pink-400 transition-all">
+                    <a href="https://dexscreener.com/solana/FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon" target="_blank" class="text-white hover:text-pink-400 transition-all">
                         <img src="images/dex.png" alt="Dexscreener" class="w-6 h-6 filter invert hover:brightness-0 hover:invert-0 transition-all">
                     </a>
-                    <!-- Buy button -->
-                    <a href="https://jup.ag/swap/SOL-FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon" target="_blank" class="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 px-3 md:px-8 py-1.5 md:py-3 rounded-full font-bold hover:opacity-90 transition-all btn-hover text-xs md:text-lg text-white whitespace-nowrap">
-                        <span class="md:hidden">Buy</span>
-                        <span class="hidden md:inline">Buy $LEADER</span>
+                    <a href="https://jup.ag/swap/SOL-FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon" target="_blank" class="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 px-8 py-3 rounded-full font-bold hover:opacity-90 transition-all btn-hover text-white">
+                        Buy $LEADER
+                    </a>
+                </div>
+            </div>
+            <!-- Mobile Menu Dropdown -->
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="px-4 py-3 space-y-3 bg-black/80 backdrop-blur-lg">
+                    <a href="https://x.com/LeaderONSolana" target="_blank" class="flex items-center space-x-3 text-white hover:text-pink-400 transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                        </svg>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="https://t.me/squidgamesportal" target="_blank" class="flex items-center space-x-3 text-white hover:text-pink-400 transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.623 4.823-4.35c.212-.19-.043-.295-.325-.105l-5.965 3.75-2.525-.785c-.55-.176-.564-.576.12-.852l9.873-3.8c.456-.204.856.11.86.57z"/>
+                        </svg>
+                        <span>Telegram</span>
+                    </a>
+                    <a href="https://dexscreener.com/solana/FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon" target="_blank" class="flex items-center space-x-3 text-white hover:text-pink-400 transition-all">
+                        <img src="images/dex.png" alt="Dexscreener" class="w-5 h-5 filter invert">
+                        <span>Chart</span>
                     </a>
                 </div>
             </div>
@@ -1488,11 +1395,9 @@
                         </p>
                         <div class="contract-address mb-8">
                             <p class="text-red-500 font-bold mb-2 text-lg">Contract Address:</p>
-                            <div class="glass-effect rounded-xl cursor-pointer hover:bg-opacity-20 transition-all relative group">
-                                <div class="flex flex-col md:flex-row items-center justify-between gap-2 w-full">
-                                    <div class="w-full text-center md:text-left overflow-hidden">
-                                        <span class="text-pink-400 font-mono font-bold tracking-tight break-all">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
-                                    </div>
+                            <div class="glass-effect px-4 py-3 rounded-xl cursor-pointer hover:bg-opacity-20 transition-all relative group border-2 border-purple-500/30">
+                                <div class="flex items-center justify-between gap-3">
+                                    <span class="text-sm md:text-lg text-pink-400 font-mono font-bold tracking-wider">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
                                     <div class="copy-icon opacity-70 group-hover:opacity-100 transition-all flex-shrink-0 bg-purple-500/10 p-2 rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
@@ -1501,8 +1406,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hero-buy-button flex flex-col md:flex-row gap-3 md:gap-6 justify-center md:justify-start">
-                            <a href="https://jup.ag/swap/SOL-FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon" target="_blank" class="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 px-6 md:px-10 py-3 md:py-5 rounded-full font-bold text-base md:text-xl hover:opacity-90 transition-all btn-hover text-white flex items-center justify-center">
+                        <div class="flex flex-col md:flex-row gap-3 md:gap-6 justify-center md:justify-start">
+                            <a href="https://jup.ag/swap/SOL-FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon" target="_blank" class="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 px-6 md:px-10 py-3 md:py-5 rounded-full font-bold text-base md:text-xl hover:opacity-90 transition-all btn-hover text-white">
                                 Buy $LEADER Now
                             </a>
                         </div>
@@ -1756,11 +1661,9 @@
                     <div class="mb-10">
                         <p class="text-red-500 font-bold mb-3 text-lg">Contract Address:</p>
                         <div class="contract-address">
-                            <div class="glass-effect px-4 py-3 rounded-xl cursor-pointer hover:bg-opacity-20 transition-all relative group">
-                                <div class="flex flex-col md:flex-row items-center justify-between gap-3 w-full">
-                                    <div class="w-full text-center md:text-left">
-                                        <span class="text-[10px] md:text-base text-pink-400 font-mono font-bold tracking-wider break-all">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
-                                    </div>
+                            <div class="glass-effect px-4 py-3 rounded-xl cursor-pointer hover:bg-opacity-20 transition-all relative group border-2 border-purple-500/30">
+                                <div class="flex items-center justify-between gap-3">
+                                    <span class="text-sm md:text-lg text-pink-400 font-mono font-bold tracking-wider">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
                                     <div class="copy-icon opacity-70 group-hover:opacity-100 transition-all flex-shrink-0 bg-purple-500/10 p-2 rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
@@ -1805,26 +1708,28 @@
 
         <!-- Add chat interface -->
         <div id="chat-interface" class="fixed bottom-24 right-6 w-[400px] bg-gradient-to-b from-purple-900/95 to-pink-900/95 rounded-2xl shadow-2xl backdrop-blur-lg hidden z-50 border border-white/10">
-            <div class="p-4 border-b border-white/10 bg-black/20 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white">$LEADER Assistant</h3>
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                            <span class="text-sm text-green-400">Online</span>
+            <div class="p-4 border-b border-white/10 bg-black/20">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">$LEADER Assistant</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span class="text-sm text-green-400">Online</span>
+                            </div>
                         </div>
                     </div>
+                    <button id="close-chat" class="text-white/60 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
-                <button id="close-chat" class="text-white/60 hover:text-white transition-colors p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
             </div>
             <div id="chat-messages" class="p-4 h-[400px] overflow-y-auto space-y-4 custom-scrollbar">
                 <div class="flex items-start gap-3 fade-in">
@@ -2806,6 +2711,31 @@
 
             // Set initial greeting
             document.querySelector('#chat-messages .text-white').textContent = initialGreeting;
+
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+            // Hide mobile menu on scroll
+            let mobileMenuLastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > mobileMenuLastScrollTop) {
+                    mobileMenu.classList.add('hidden');
+                }
+                mobileMenuLastScrollTop = scrollTop;
+            });
         </script>
     </div>
 </body>
