@@ -2251,9 +2251,25 @@
                     const messageText = document.createElement('p');
                     messageText.className = 'text-white leading-relaxed whitespace-pre-line';
                     
-                    // Check if message contains a contract address
+                    // Format links in the message
+                    let formattedMessage = message;
+                    
+                    // Replace Markdown-style links with HTML links
+                    formattedMessage = formattedMessage.replace(/\[([^\]]+)\]\(([^)]+)\)/g, 
+                        '<a href="$2" target="_blank" class="text-pink-400 hover:text-pink-300 underline transition-colors">$1</a>'
+                    );
+                    
+                    // Format contract addresses
                     const contractRegex = /([A-Za-z0-9]{32,})/g;
-                    const formattedMessage = message.replace(contractRegex, '<span class="contract-text">$1</span>');
+                    formattedMessage = formattedMessage.replace(contractRegex, 
+                        '<span class="contract-text font-mono text-pink-400">$1</span>'
+                    );
+                    
+                    // Add bullet points styling
+                    formattedMessage = formattedMessage.replace(/^\* (.*?)$/gm, 
+                        '<div class="flex items-center gap-2 my-1"><span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>$1</div>'
+                    );
+                    
                     messageText.innerHTML = formattedMessage;
                     
                     messageBubble.appendChild(messageText);
