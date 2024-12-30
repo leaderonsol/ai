@@ -1215,6 +1215,102 @@
                 color: transparent !important;
             }
         }
+
+        /* Enhanced Mobile Contract Address Fix */
+        @media (max-width: 768px) {
+            .contract-address {
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            .contract-address .glass-effect {
+                width: 100% !important;
+                padding: 12px !important;
+                margin: 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            .contract-address span {
+                font-size: 10px !important;
+                line-height: 1.4 !important;
+                word-break: break-all !important;
+                width: 100% !important;
+                text-align: center !important;
+                padding: 0 4px !important;
+            }
+
+            .contract-address .glass-effect > div {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 8px !important;
+                width: 100% !important;
+            }
+
+            /* Fix navigation z-index */
+            nav.main-nav {
+                z-index: 9999 !important;
+            }
+
+            /* Ensure content is below nav */
+            .hero-gradient {
+                padding-top: 100px !important;
+                position: relative !important;
+                z-index: 1 !important;
+            }
+
+            /* Fix glass effect cards */
+            .glass-effect {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background: rgba(26, 0, 51, 0.6) !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+        }
+
+        /* Global contract address styles */
+        .contract-address {
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .contract-address .glass-effect {
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .contract-address span {
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-all;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+        /* Fix z-index hierarchy */
+        nav.main-nav {
+            z-index: 9999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .hero-gradient {
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-effect {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body style="margin: 0; padding: 0;">
@@ -1266,8 +1362,10 @@
                         <div class="contract-address mb-8">
                             <p class="text-red-500 font-bold mb-2 text-lg">Contract Address:</p>
                             <div class="glass-effect px-4 py-3 rounded-xl cursor-pointer hover:bg-opacity-20 transition-all relative group">
-                                <div class="flex flex-col md:flex-row items-center justify-between gap-3">
-                                    <span class="text-sm md:text-base text-pink-400 font-mono font-bold tracking-wider break-all">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
+                                <div class="flex flex-col md:flex-row items-center justify-between gap-3 w-full">
+                                    <div class="w-full text-center md:text-left">
+                                        <span class="text-[10px] md:text-base text-pink-400 font-mono font-bold tracking-wider break-all">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
+                                    </div>
                                     <div class="copy-icon opacity-70 group-hover:opacity-100 transition-all flex-shrink-0 bg-purple-500/10 p-2 rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
@@ -1532,8 +1630,10 @@
                         <p class="text-red-500 font-bold mb-3 text-lg">Contract Address:</p>
                         <div class="contract-address">
                             <div class="glass-effect px-4 py-3 rounded-xl cursor-pointer hover:bg-opacity-20 transition-all relative group">
-                                <div class="flex flex-col md:flex-row items-center justify-between gap-3">
-                                    <span class="text-sm md:text-base text-pink-400 font-mono font-bold tracking-wider break-all">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
+                                <div class="flex flex-col md:flex-row items-center justify-between gap-3 w-full">
+                                    <div class="w-full text-center md:text-left">
+                                        <span class="text-[10px] md:text-base text-pink-400 font-mono font-bold tracking-wider break-all">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
+                                    </div>
                                     <div class="copy-icon opacity-70 group-hover:opacity-100 transition-all flex-shrink-0 bg-purple-500/10 p-2 rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
