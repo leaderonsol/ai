@@ -1057,6 +1057,29 @@
             word-break: break-word !important;
             overflow-wrap: break-word !important;
         }
+
+        /* Add these styles to the existing styles section */
+        .message-bubble a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.125rem 0;
+        }
+
+        .message-bubble a:hover svg {
+            transform: translate(2px, -2px);
+            transition: transform 0.2s ease;
+        }
+
+        .message-bubble .font-bold {
+            color: rgb(244, 114, 182);
+            font-size: 1.05em;
+            letter-spacing: 0.02em;
+        }
+
+        .message-bubble div + div {
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body style="margin: 0; padding: 0;">
@@ -1167,24 +1190,24 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Community Power Card - Full Width -->
                     <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300 md:col-span-3 mb-8">
-                        <div class="text-6xl mb-4 gradient-text">💪</div>
-                        <h3 class="text-2xl font-bold mb-2">Official Coordinator</h3>
+                        <div class="text-6xl mb-4 text-white">💪</div>
+                        <h3 class="text-2xl font-bold mb-2 text-white">Official Coordinator</h3>
                     </div>
                     <!-- Other Cards -->
                     <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300">
-                        <div class="text-6xl mb-4 gradient-text">0%</div>
-                        <h3 class="text-2xl font-bold mb-2">Tax</h3>
-                        <p class="text-gray-300">Zero tax on buys and sells. Trade freely without any fees!</p>
+                        <div class="text-6xl mb-4 text-pink-400 font-bold">0%</div>
+                        <h3 class="text-2xl font-bold mb-2 text-white">Tax</h3>
+                        <p class="text-gray-200">Zero tax on buys and sells. Trade freely without any fees!</p>
                     </div>
                     <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300">
-                        <div class="text-6xl mb-4 gradient-text">100%</div>
-                        <h3 class="text-2xl font-bold mb-2">LP Burned</h3>
-                        <p class="text-gray-300">Liquidity permanently locked. Maximum security for traders.</p>
+                        <div class="text-6xl mb-4 text-pink-400 font-bold">100%</div>
+                        <h3 class="text-2xl font-bold mb-2 text-white">LP Burned</h3>
+                        <p class="text-gray-200">Liquidity permanently locked. Maximum security for traders.</p>
                     </div>
                     <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300">
-                        <div class="text-6xl mb-4">🔒</div>
-                        <h3 class="text-2xl font-bold mb-2">Game Master</h3>
-                        <p class="text-gray-300">The official coordinator token of the Squid Games ecosystem.</p>
+                        <div class="text-6xl mb-4 text-white">🔒</div>
+                        <h3 class="text-2xl font-bold mb-2 text-white">Game Master</h3>
+                        <p class="text-gray-200">The official coordinator token of the Squid Games ecosystem.</p>
                     </div>
                 </div>
             </div>
@@ -2140,6 +2163,88 @@
                 }
             };
 
+            // Message formatting utility functions
+            function sanitizeMessage(message) {
+                return message
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            function formatLinks(message) {
+                // Clean up malformed markdown links
+                message = message.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$2');
+                
+                // Format Telegram links
+                message = message.replace(/(https?:\/\/t\.me\/\w+)/g, (match) => {
+                    return `<a href="${match}" target="_blank" class="inline-flex items-center gap-1 text-pink-400 hover:text-pink-300 underline transition-colors">
+                        <span>${match}</span>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>`;
+                });
+
+                // Format other URLs
+                message = message.replace(/(https?:\/\/(?!t\.me)[^\s<]+)/g, (url) => {
+                    return `<a href="${url}" target="_blank" class="inline-flex items-center gap-1 text-pink-400 hover:text-pink-300 underline transition-colors">
+                        <span>${url}</span>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>`;
+                });
+
+                return message;
+            }
+
+            function formatBulletPoints(message) {
+                return message.replace(/^\* (.+)$/gm, (match, content) => {
+                    return `<div class="flex items-start gap-2 my-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-pink-400 mt-2"></span>
+                        <span class="flex-1">${content}</span>
+                    </div>`;
+                });
+            }
+
+            function formatSections(message) {
+                return message.replace(/^([^:\n]+):$/gm, (match, title) => {
+                    return `<div class="text-pink-400 font-bold text-lg mt-4 mb-2">${title}:</div>`;
+                });
+            }
+
+            function formatContractAddress(message) {
+                return message.replace(/\b([A-Za-z0-9]{32,})\b/g, (match, address) => {
+                    return `<span class="font-mono text-pink-400 text-sm break-all">${address}</span>`;
+                });
+            }
+
+            function addSpacing(message) {
+                return message
+                    .replace(/\n{3,}/g, '\n\n')
+                    .replace(/\n\n/g, '<div class="h-4"></div>')
+                    .replace(/\n/g, '<br>');
+            }
+
+            // Main message formatting function
+            function formatMessage(message) {
+                let formattedMessage = message;
+                
+                // Step 1: Sanitize the input
+                formattedMessage = sanitizeMessage(formattedMessage);
+                
+                // Step 2: Format different elements
+                formattedMessage = formatSections(formattedMessage);
+                formattedMessage = formatBulletPoints(formattedMessage);
+                formattedMessage = formatContractAddress(formattedMessage);
+                formattedMessage = formatLinks(formattedMessage);
+                formattedMessage = addSpacing(formattedMessage);
+                
+                return formattedMessage;
+            }
+
             // Enhanced send message function with better formatting
             async function sendMessage(message) {
                 addMessageToChat('user', message);
@@ -2248,29 +2353,9 @@
                         ? 'bg-gradient-to-r from-purple-500/40 to-pink-500/40 rounded-2xl px-4 py-2 max-w-[280px] ml-auto message-bubble' 
                         : 'bg-white/10 rounded-2xl px-4 py-2 max-w-[280px] message-bubble';
                     
-                    const messageText = document.createElement('p');
-                    messageText.className = 'text-white leading-relaxed whitespace-pre-line';
-                    
-                    // Format links in the message
-                    let formattedMessage = message;
-                    
-                    // Replace Markdown-style links with HTML links
-                    formattedMessage = formattedMessage.replace(/\[([^\]]+)\]\(([^)]+)\)/g, 
-                        '<a href="$2" target="_blank" class="text-pink-400 hover:text-pink-300 underline transition-colors">$1</a>'
-                    );
-                    
-                    // Format contract addresses
-                    const contractRegex = /([A-Za-z0-9]{32,})/g;
-                    formattedMessage = formattedMessage.replace(contractRegex, 
-                        '<span class="contract-text font-mono text-pink-400">$1</span>'
-                    );
-                    
-                    // Add bullet points styling
-                    formattedMessage = formattedMessage.replace(/^\* (.*?)$/gm, 
-                        '<div class="flex items-center gap-2 my-1"><span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>$1</div>'
-                    );
-                    
-                    messageText.innerHTML = formattedMessage;
+                    const messageText = document.createElement('div');
+                    messageText.className = 'text-white leading-relaxed';
+                    messageText.innerHTML = formatMessage(message);
                     
                     messageBubble.appendChild(messageText);
                     messageContent.appendChild(messageBubble);
@@ -2346,13 +2431,18 @@
             });
 
             // Update initial greeting
-            const initialGreeting = `Hello! I'm the $LEADER AI assistant. I can help you with information about:
-- Token details and features
-- Contract address and buying instructions
-- Project background and team
-- Latest updates and community info
+            const initialGreeting = `LEADER Token Info:
+            * Name: $LEADER
+            * Contract: FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon
+            * Description: Squid Games coordinator.
+            * Background: Relaunched by the $squidgame CTO team.
+            * Role: SquidGame's Frontman.
 
-How can I assist you today?`;
+            Buy:
+            https://jup.ag/swap/SOL-FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon
+
+            Chart:
+            https://dexscreener.com/solana/FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon`;
 
             // Set initial greeting
             document.querySelector('#chat-messages .text-white').textContent = initialGreeting;
