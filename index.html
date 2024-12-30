@@ -1311,6 +1311,75 @@
             position: relative;
             z-index: 1;
         }
+
+        /* Mobile Contract Address Ultimate Fix */
+        .contract-address {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .contract-address .glass-effect {
+            width: 100%;
+            max-width: 100%;
+            padding: 8px !important;
+            margin: 0 !important;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .contract-address span {
+            font-family: monospace;
+            font-size: clamp(8px, 3vw, 14px) !important;
+            line-height: 1.4;
+            letter-spacing: -0.2px;
+            word-break: break-all;
+            overflow-wrap: break-word;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .contract-address {
+                padding: 0 5px !important;
+            }
+
+            .contract-address .glass-effect {
+                padding: 8px 4px !important;
+            }
+
+            .contract-address .glass-effect > div {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+
+            .contract-address span {
+                font-size: 2.8vw !important;
+                letter-spacing: -0.3px;
+                padding: 0 2px;
+            }
+
+            .copy-icon {
+                transform: scale(0.9);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contract-address span {
+                font-size: 2.5vw !important;
+            }
+        }
+
+        /* Fix container padding */
+        .container {
+            padding-left: max(15px, 4vw) !important;
+            padding-right: max(15px, 4vw) !important;
+        }
     </style>
 </head>
 <body style="margin: 0; padding: 0;">
@@ -1361,10 +1430,10 @@
                         </p>
                         <div class="contract-address mb-8">
                             <p class="text-red-500 font-bold mb-2 text-lg">Contract Address:</p>
-                            <div class="glass-effect px-4 py-3 rounded-xl cursor-pointer hover:bg-opacity-20 transition-all relative group">
-                                <div class="flex flex-col md:flex-row items-center justify-between gap-3 w-full">
-                                    <div class="w-full text-center md:text-left">
-                                        <span class="text-[10px] md:text-base text-pink-400 font-mono font-bold tracking-wider break-all">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
+                            <div class="glass-effect rounded-xl cursor-pointer hover:bg-opacity-20 transition-all relative group">
+                                <div class="flex flex-col md:flex-row items-center justify-between gap-2 w-full">
+                                    <div class="w-full text-center md:text-left overflow-hidden">
+                                        <span class="text-pink-400 font-mono font-bold tracking-tight break-all">FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon</span>
                                     </div>
                                     <div class="copy-icon opacity-70 group-hover:opacity-100 transition-all flex-shrink-0 bg-purple-500/10 p-2 rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
