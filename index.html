@@ -82,48 +82,82 @@
 
         /* Mobile-specific fixes */
         @media (max-width: 768px) {
-            .contract-address span {
-                font-size: 12px !important;
-                word-break: break-all;
-                display: block;
-                padding: 2px 0;
+            /* Fix scrolling issues */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100% !important;
+                position: relative !important;
+                -webkit-overflow-scrolling: touch !important;
             }
 
+            #content-wrapper {
+                overflow-x: hidden !important;
+                width: 100% !important;
+                position: relative !important;
+                z-index: 1 !important;
+            }
+
+            /* Add spacing between feature boxes */
             .glass-effect {
-                padding: 8px !important;
+                margin-bottom: 16px !important;
             }
 
-            .hero-gradient {
-                padding-top: 80px !important;
+            /* Grid layout fixes for mobile */
+            .grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 16px !important;
+                padding: 0 12px !important;
             }
 
-            /* Fix mobile navigation */
-            nav.main-nav {
-                backdrop-filter: blur(20px) !important;
-                -webkit-backdrop-filter: blur(20px) !important;
+            .grid > div {
+                width: 100% !important;
+                margin-bottom: 16px !important;
             }
 
-            /* Improve mobile scrolling */
-            #chat-messages {
-                -webkit-overflow-scrolling: touch;
-            }
-
-            /* Fix contract address container */
-            .contract-address .glass-effect {
-                padding: 8px !important;
-                margin: 0 4px;
-            }
-
-            /* Adjust hero image size */
-            .hero-image {
-                width: 240px !important;
-                height: auto !important;
-            }
-
-            /* Fix mobile spacing */
+            /* Container spacing fix */
             .container {
                 padding-left: 12px !important;
                 padding-right: 12px !important;
+                overflow: hidden !important;
+            }
+
+            /* Section spacing fix */
+            .py-20 {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+            /* Fix background effects for better performance */
+            .background-effects {
+                display: none !important;
+            }
+
+            /* Optimize animations for better performance */
+            .transform, .transition-all {
+                transform: none !important;
+                transition: none !important;
+            }
+
+            /* Fix feature boxes layout */
+            .grid-cols-1 {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 16px !important;
+            }
+
+            .md\:col-span-3 {
+                margin-bottom: 16px !important;
+            }
+
+            /* Fix glass effect cards */
+            .glass-effect {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background: rgba(26, 0, 51, 0.8) !important;
+                margin-bottom: 16px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
         }
 
@@ -1598,9 +1632,9 @@
         <!-- Add after Hero Section and before Dexscreener Section -->
         <section class="py-20 relative overflow-hidden">
             <div class="container mx-auto px-4">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
                     <!-- Community Power Card - Full Width -->
-                    <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300 md:col-span-3 mb-8">
+                    <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300 md:col-span-3 mb-4 md:mb-8">
                         <div class="text-6xl mb-4 text-white">💪</div>
                         <h3 class="text-2xl font-bold mb-2 text-white">Official Coordinator</h3>
                     </div>
@@ -1621,11 +1655,14 @@
                         <p class="text-gray-200">Liquidity permanently locked. Maximum security for traders.</p>
                     </div>
                     <!-- Multi-Sig Card - Full Width -->
-                    <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300 md:col-span-3">
+                    <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300 md:col-span-3 mt-4 md:mt-8">
                         <div class="text-6xl mb-4 text-white">🔒</div>
                         <h3 class="text-2xl font-bold mb-2 text-white">Multi-Signature Marketing Wallet</h3>
                         <p class="text-gray-200 mb-3">Secure multi-signature wallet controlled by the CTO team for marketing purposes only. This is NOT the token mint address.</p>
-                        <div class="text-pink-400 font-mono text-sm bg-black/20 p-3 rounded-xl inline-block">xsbtM9fsLp7jJLhM2z2RZJawecVR8bci8XzYKqExg6P</div>
+                        <div class="flex items-center justify-center gap-2">
+                            <span class="text-pink-400 font-mono text-sm bg-black/20 p-3 rounded-xl">xsbtM9fsLp7jJLhM2z2RZJawecVR8bci8XzYKqExg6P</span>
+                            <a href="https://solscan.io/account/xsbtM9fsLp7jJLhM2z2RZJawecVR8bci8XzYKqExg6P" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-2 rounded-xl text-sm hover:opacity-90 transition-all">Track</a>
+                        </div>
                     </div>
                 </div>
             </div>
