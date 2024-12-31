@@ -1387,14 +1387,10 @@
                 max-height: 100vh !important;
                 margin: 0 !important;
                 border-radius: 0 !important;
-                z-index: 9999 !important;
-                background: rgba(10, 0, 20, 0.98) !important;
             }
 
             #chat-messages {
                 height: calc(100vh - 140px) !important;
-                max-height: none !important;
-                padding: 16px !important;
             }
 
             #chat-interface .p-4 {
@@ -1433,83 +1429,37 @@
             }
         }
 
-        /* Improved Scrolling Performance */
-        * {
-            -webkit-overflow-scrolling: touch !important;
-            overscroll-behavior: none !important;
-            scroll-behavior: smooth !important;
+        /* Desktop Chat Interface */
+        @media (min-width: 769px) {
+            #chat-interface {
+                height: 600px !important;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+
+            #chat-messages {
+                height: calc(600px - 140px) !important;
+            }
         }
 
-        body {
-            touch-action: manipulation !important;
-            -webkit-tap-highlight-color: transparent !important;
+        /* Always visible chat button */
+        #ai-chat-button {
+            position: fixed !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 9998 !important;
+            transition: transform 0.3s ease !important;
         }
 
+        /* Hide button only when chat is open */
+        #chat-interface:not(.hidden) ~ #ai-chat-button {
+            display: none !important;
+        }
+
+        /* Ensure button stays above other content */
         #content-wrapper {
-            position: relative !important;
-            z-index: 1 !important;
-            background: #0a0014 !important;
-            min-height: 100vh !important;
-            overflow-y: auto !important;
-            overflow-x: hidden !important;
-            -webkit-overflow-scrolling: touch !important;
-            overscroll-behavior-y: none !important;
-            will-change: transform !important;
-        }
-
-        /* Optimize scrolling containers */
-        .custom-scrollbar {
-            scrollbar-width: thin !important;
-            scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
-            -webkit-overflow-scrolling: touch !important;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px !important;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent !important;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, 0.2) !important;
-            border-radius: 4px !important;
-        }
-
-        /* Reduce motion on mobile */
-        @media (max-width: 768px) {
-            * {
-                animation-duration: 0s !important;
-                transition-duration: 0s !important;
-            }
-
-            .transform, .transition-all {
-                transform: none !important;
-                transition: none !important;
-            }
-
-            .hover\:scale-105:hover {
-                transform: none !important;
-            }
-
-            /* Optimize touch interactions */
-            .glass-effect, button, a {
-                touch-action: manipulation !important;
-                -webkit-tap-highlight-color: transparent !important;
-                user-select: none !important;
-                -webkit-user-select: none !important;
-            }
-
-            /* Improve scroll performance */
-            .container {
-                transform: translateZ(0) !important;
-                -webkit-transform: translateZ(0) !important;
-                backface-visibility: hidden !important;
-                -webkit-backface-visibility: hidden !important;
-                perspective: 1000px !important;
-                -webkit-perspective: 1000px !important;
-            }
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -1661,14 +1611,21 @@
                         <p class="text-gray-200">Zero tax on buys and sells. Trade freely without any fees!</p>
                     </div>
                     <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300">
+                        <div class="text-6xl mb-4 text-pink-400 font-bold">32.4M</div>
+                        <h3 class="text-2xl font-bold mb-2 text-white">Tokens Burned</h3>
+                        <p class="text-gray-200">Tokens permanently burned by the community!</p>
+                    </div>
+                    <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300">
                         <div class="text-6xl mb-4 text-pink-400 font-bold">100%</div>
                         <h3 class="text-2xl font-bold mb-2 text-white">LP Burned</h3>
                         <p class="text-gray-200">Liquidity permanently locked. Maximum security for traders.</p>
                     </div>
-                    <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300">
+                    <!-- Multi-Sig Card - Full Width -->
+                    <div class="glass-effect p-8 rounded-3xl text-center transform hover:scale-105 transition-all duration-300 md:col-span-3">
                         <div class="text-6xl mb-4 text-white">🔒</div>
-                        <h3 class="text-2xl font-bold mb-2 text-white">Game Master</h3>
-                        <p class="text-gray-200">The official coordinator token of the Squid Games ecosystem.</p>
+                        <h3 class="text-2xl font-bold mb-2 text-white">Multi-Signature Marketing Wallet</h3>
+                        <p class="text-gray-200 mb-3">Secure multi-signature wallet controlled by the CTO team for marketing purposes only. This is NOT the token mint address.</p>
+                        <div class="text-pink-400 font-mono text-sm bg-black/20 p-3 rounded-xl inline-block">xsbtM9fsLp7jJLhM2z2RZJawecVR8bci8XzYKqExg6P</div>
                     </div>
                 </div>
             </div>
@@ -1878,8 +1835,8 @@
             <p class="text-gray-400">© 2024 $LEADER - The Coordinator of Squid Games. All rights reserved.</p>
         </footer>
 
-        <!-- Add before closing body tag -->
-        <div id="ai-chat-button" class="fixed bottom-6 right-6 z-50">
+        <!-- AI Chat Button - Fixed Position -->
+        <div id="ai-chat-button" class="fixed bottom-6 right-6 z-[9999] w-auto" style="position: fixed !important; visibility: visible !important; opacity: 1 !important;">
             <button class="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 p-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 btn-hover group flex items-center gap-3">
                 <div class="relative">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1894,149 +1851,141 @@
             </button>
         </div>
 
-        <!-- Add chat interface -->
-        <div id="chat-interface" class="fixed bottom-24 right-6 w-[400px] bg-gradient-to-b from-purple-900/95 to-pink-900/95 rounded-2xl shadow-2xl backdrop-blur-lg hidden z-50 border border-white/10">
-            <div class="p-4 border-b border-white/10 bg-black/20">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-white">$LEADER Assistant</h3>
-                            <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                                <span class="text-sm text-green-400">Online</span>
+        <!-- Updated Chat Interface -->
+        <div id="chat-interface" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[9999] hidden md:w-[400px] md:inset-auto md:bottom-24 md:right-6 md:top-auto md:left-auto md:rounded-2xl">
+            <div class="flex flex-col h-full max-h-[600px] w-full">
+                <!-- Chat Header -->
+                <div class="p-4 border-b border-white/10 bg-black/20">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">$LEADER Assistant</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                    <span class="text-sm text-green-400">Online</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button id="close-chat" class="text-white/60 hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div id="chat-messages" class="p-4 h-[400px] overflow-y-auto space-y-4 custom-scrollbar">
-                <div class="flex items-start gap-3 fade-in">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <div class="bg-white/10 rounded-2xl px-4 py-2 max-w-[300px] message-bubble">
-                            <p class="text-white leading-relaxed">Hello! I'm the $LEADER AI assistant. How can I help you today?</p>
-                        </div>
-                        <div class="flex gap-2 mt-2">
-                            <button class="quick-action-btn">Token Info</button>
-                            <button class="quick-action-btn">How to Buy</button>
-                            <button class="quick-action-btn">Price</button>
-                        </div>
+                        <button id="close-chat" class="text-white/60 hover:text-white transition-colors p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
-            </div>
-            <div class="p-4 border-t border-white/10 bg-black/20">
-                <div class="flex gap-2">
-                    <div class="relative flex-1">
-                        <input type="text" id="chat-input" class="w-full bg-white/10 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all pr-10" placeholder="Type your message...">
-                        <div class="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 text-sm">Press Enter ↵</div>
+
+                <!-- Chat Messages -->
+                <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 custom-scrollbar">
+                    <!-- Messages will be added here dynamically -->
+                </div>
+
+                <!-- Chat Input -->
+                <div class="p-4 border-t border-white/10 bg-black/20">
+                    <div class="flex gap-2">
+                        <input type="text" id="chat-input" class="flex-1 bg-white/10 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Type your message...">
+                        <button id="send-message" class="bg-gradient-to-r from-purple-600 to-pink-500 rounded-xl p-3 text-white hover:opacity-90 transition-all flex items-center justify-center w-12">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                            </svg>
+                        </button>
                     </div>
-                    <button id="send-message" class="bg-gradient-to-r from-purple-600 to-pink-500 rounded-xl p-3 text-white hover:opacity-90 transition-all flex items-center justify-center w-12 h-12">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
 
         <style>
-            /* Add these styles to your existing styles */
-            .custom-scrollbar::-webkit-scrollbar {
-                width: 6px;
-            }
-            
-            .custom-scrollbar::-webkit-scrollbar-track {
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 3px;
-            }
-            
-            .custom-scrollbar::-webkit-scrollbar-thumb {
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 3px;
-            }
-            
-            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                background: rgba(255, 255, 255, 0.3);
+            /* Enhanced Mobile Chat Interface */
+            @media (max-width: 768px) {
+                #chat-interface {
+                    position: fixed !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    bottom: 0 !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: 100vh !important;
+                    max-height: 100vh !important;
+                    margin: 0 !important;
+                    border-radius: 0 !important;
+                }
+
+                #chat-messages {
+                    height: calc(100vh - 140px) !important;
+                }
+
+                #chat-interface .p-4 {
+                    padding: 12px !important;
+                }
+
+                /* Chat header */
+                #chat-interface > div:first-child {
+                    padding: 12px !important;
+                    background: rgba(0, 0, 0, 0.3) !important;
+                    backdrop-filter: blur(12px) !important;
+                    -webkit-backdrop-filter: blur(12px) !important;
+                }
+
+                /* Close button */
+                #close-chat {
+                    padding: 8px !important;
+                }
+
+                /* Input area */
+                #chat-interface > div:last-child {
+                    padding: 12px !important;
+                    background: rgba(0, 0, 0, 0.3) !important;
+                    backdrop-filter: blur(12px) !important;
+                    -webkit-backdrop-filter: blur(12px) !important;
+                }
+
+                #chat-input {
+                    padding: 12px !important;
+                    font-size: 16px !important; /* Prevent zoom on iOS */
+                }
+
+                /* Hide AI chat button when chat is open */
+                #chat-interface:not(.hidden) ~ #ai-chat-button {
+                    display: none !important;
+                }
             }
 
-            .message-bubble {
+            /* Desktop Chat Interface */
+            @media (min-width: 769px) {
+                #chat-interface {
+                    height: 600px !important;
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+                    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                }
+
+                #chat-messages {
+                    height: calc(600px - 140px) !important;
+                }
+            }
+
+            /* Always visible chat button */
+            #ai-chat-button {
+                position: fixed !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                z-index: 9998 !important;
+                transition: transform 0.3s ease !important;
+            }
+
+            /* Hide button only when chat is open */
+            #chat-interface:not(.hidden) ~ #ai-chat-button {
+                display: none !important;
+            }
+
+            /* Ensure button stays above other content */
+            #content-wrapper {
                 position: relative;
-                animation: messageAppear 0.3s ease-out;
-                word-break: break-all; /* Add this to break long text */
-            }
-
-            .message-bubble p {
-                overflow-wrap: break-word; /* Add this for better word wrapping */
-                word-wrap: break-word;
-                hyphens: auto;
-                max-width: 100%;
-            }
-
-            /* Update message bubble max width */
-            .bg-gradient-to-r.from-purple-500\/40.to-pink-500\/40,
-            .bg-white\/10 {
-                max-width: 280px !important; /* Ensure consistent max width */
-                width: 100%;
-            }
-
-            /* Add styles for contract address */
-            .contract-text {
-                font-family: monospace;
-                font-size: 0.9em;
-                line-height: 1.4;
-                padding: 2px 0;
-            }
-
-            @keyframes messageAppear {
-                from {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .quick-action-btn {
-                background: rgba(255, 255, 255, 0.1);
-                padding: 4px 12px;
-                border-radius: 100px;
-                font-size: 0.875rem;
-                color: rgba(255, 255, 255, 0.8);
-                transition: all 0.2s ease;
-            }
-
-            .quick-action-btn:hover {
-                background: rgba(255, 255, 255, 0.2);
-                transform: translateY(-1px);
-            }
-
-            .fade-in {
-                animation: fadeIn 0.5s ease-out;
-            }
-
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                }
-                to {
-                    opacity: 1;
-                }
+                z-index: 1;
             }
         </style>
 
@@ -2221,7 +2170,7 @@
             // Add this to your existing script section
             async function fetchDexscreenerData() {
                 try {
-                    const response = await fetch('https://api.dexscreener.com/latest/dex/tokens/9Y69BuZTXpieDoUy8mva17fZWFVhi5Gi98ebqtoFpump');
+                    const response = await fetch('https://api.dexscreener.com/latest/dex/tokens/FZVdeHPkSRwHeQ7f7opXdGwee1NbhPvniCtJSmi4moon');
                     const data = await response.json();
                     
                     if (data.pairs && data.pairs[0]) {
@@ -2535,11 +2484,38 @@
             const sendButton = document.getElementById('send-message');
             const closeChat = document.getElementById('close-chat');
 
+            // Show initial message
+            function showInitialMessage() {
+                const initialMessage = `
+                    <div class="flex items-start gap-3 fade-in">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div class="bg-white/10 rounded-2xl px-4 py-2 max-w-[300px] message-bubble">
+                                <p class="text-white leading-relaxed">Hello! I'm the $LEADER AI assistant. How can I help you today?</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <button class="quick-action-btn">Token Info</button>
+                                <button class="quick-action-btn">How to Buy</button>
+                                <button class="quick-action-btn">Price</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                chatMessages.innerHTML = initialMessage;
+            }
+
             // Show/hide chat interface
             aiChatButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                chatInterface.classList.toggle('hidden');
+                chatInterface.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                showInitialMessage();
+                chatInput.focus();
             });
 
             // Close chat interface
@@ -2547,19 +2523,32 @@
                 e.preventDefault();
                 e.stopPropagation();
                 chatInterface.classList.add('hidden');
-            });
-
-            // Close chat when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!chatInterface.contains(e.target) && !aiChatButton.contains(e.target)) {
-                    chatInterface.classList.add('hidden');
-                }
+                document.body.style.overflow = ''; // Restore scrolling
             });
 
             // Prevent chat interface from closing when clicking inside it
             chatInterface.addEventListener('click', (e) => {
                 e.stopPropagation();
             });
+
+            // Handle mobile keyboard
+            chatInput.addEventListener('focus', () => {
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 300);
+                }
+            });
+
+            // Update chat interface position on resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth <= 768) {
+                    chatInterface.style.bottom = '0';
+                }
+            });
+
+            // Prevent zoom on input on mobile
+            chatInput.style.fontSize = '16px';
 
             // Initialize Gemini API
             const API_KEY = 'AIzaSyCHFjiD4nBMPsVL1tSc5OgXvWPyAX57GHs';
